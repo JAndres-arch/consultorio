@@ -2,7 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.css';
 
-const API_BASE_URL = 'https://consultorio-frontend.onrender.com/api'
+// =================================================================================
+// 🚨 ARREGLO CRÍTICO: HACER LA URL DINÁMICA Y APUNTAR AL BACKEND (sin :5000)
+//
+// ⚠️ REEMPLAZA 'https://URL-DE-TU-BACKEND.onrender.com' CON TU URL REAL DE RENDER
+// =================================================================================
+const API_BASE_URL =
+  window.location.hostname === "localhost" || window.location.hostname === "192.168.0.29"
+    ? "http://localhost:5000/api"
+    : "https://consultorio-backend-287o.onrender.com/api";
+
 
 const Login = () => {
     const navigate = useNavigate();
@@ -27,13 +36,11 @@ const Login = () => {
         setRegisterData({ ...registerData, [e.target.name]: e.target.value });
     };
 
-    //
     const showMessage = (text, type) => {
         setMessage({ text, type });
         setTimeout(() => setMessage({ text: '', type: '' }), 4000);
     };
 
-    //
     const validateRegister = () => {
         const { nombre, cedu, telefono, email, password, confirmPassword } = registerData;
 
@@ -41,37 +48,37 @@ const Login = () => {
             showMessage("Por favor llena todos los campos.", "error");
             return false;
         }
-
+        // [CÓDIGO DE VALIDACIÓN DE REGISTRO SE MANTIENE IGUAL]
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            showMessage("Por favor, ingrese un correo valido.", "error");
-            return false;
+             showMessage("Por favor, ingrese un correo valido.", "error");
+             return false;
         }
-
         if (password.length < 8) {
             showMessage("La contraseña debe tener al menos 8 caracteres.", "error");
             return false;
         }
-
         if (password !== confirmPassword) {
             showMessage("Las contraseñas no coinciden.", "error");
             return false;
         }
-
         const telefonoSinEspacios = telefono.replace(/\s+/g, '');
         const telefonoRegex = /^\d{10}$/;
         if (!telefonoRegex.test(telefonoSinEspacios)) {
-            showMessage("Introduzca un número válido de 10 dígitos.", "error");
-            return false;
+             showMessage("Introduzca un número válido de 10 dígitos.", "error");
+             return false;
         }
         return true;
     };
 
-    //
+    // =================================================================================
+    // FUNCIÓN DE REGISTRO CORREGIDA
+    // =================================================================================
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
         if (!validateRegister()) return;
         showMessage("Enviando datos de registro...", "success");
+
         try {
             const response = await fetch(`${API_BASE_URL}/register`, {
                 method: 'POST',
@@ -85,22 +92,27 @@ const Login = () => {
                 }),
             });
 
-            //
-            const data = await response.json();
-            if (response.ok) {
-                showMessage("Registro exitoso. Inicia sesión ahora.", "success");
-                //
-                setTimeout(() => setIsLoginView(true), 2000);
-            } else {
-                //
-                showMessage(data.error || 'Fallo en el registro.', "error");
+            // Si no fue OK (Error 400/500), intenta leer el error; si no es JSON, usa un mensaje genérico.
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ error: 'Fallo en el registro (Respuesta no legible).' }));
+                showMessage(errorData.error || 'Fallo en el registro.', "error");
+                return;
             }
+            
+            // Si es OK, lee el JSON y procede.
+            const data = await response.json();
+            showMessage("Registro exitoso. Inicia sesión ahora.", "success");
+            setTimeout(() => setIsLoginView(true), 2000);
+
         } catch (error) {
-            showMessage("Error de conexión con el servidor.", "error");
+            console.error("Fallo general en el registro:", error);
+            showMessage("Error de conexión con el servidor. Verifica tu URL de API.", "error");
         }
     };
 
-    //
+    // =================================================================================
+    // FUNCIÓN DE LOGIN CORREGIDA
+    // =================================================================================
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
 
@@ -111,17 +123,23 @@ const Login = () => {
                 body: JSON.stringify(loginData),
             });
 
-            const data = await response.json();
-            if (response.ok) {
-                //
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-                showMessage("Inicio de sesión exitoso.", "success");
-                setTimeout(() => navigate('/'), 500);
-            } else {
-                showMessage(data.error || 'Crednciales inválidas.', "error");
+            // A. Si la respuesta NO fue exitosa (400, 500, etc.)
+            if (!response.ok) {
+                // Leemos el error, protegiéndonos si el backend no devuelve JSON
+                const errorData = await response.json().catch(() => ({ error: 'Error de servidor. Vuelva a intentarlo.' }));
+                showMessage(errorData.error || 'Credenciales inválidas.', "error");
+                return; 
             }
+            
+            // B. Si la respuesta fue exitosa (código 200)
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            showMessage("Inicio de sesión exitoso.", "success");
+            setTimeout(() => navigate('/'), 500);
+
         } catch (error) {
+            console.error("Fallo general en el login:", error);
             showMessage("Error de conexión con el servidor.", "error");
         }
     };
@@ -179,17 +197,17 @@ const Login = () => {
                         <input className={styles.input} type="tel" id="telefono" placeholder="Numéro Celular" name="telefono" required value={registerData.telefono} onChange={handleRegisterChange}/>
                     </div>
 
-                    <div className= {styles.inicio}>
+                    <div className={styles.inicio}>
                         <i className="bi bi-envelope-at-fill"></i>
                         <input className={styles.input} type="email" id="reg-email" placeholder="Correo" name="email" required value={registerData.email} onChange={handleRegisterChange}/>
                     </div>
 
-                    <div className= {styles.inicio}>
+                    <div className={styles.inicio}>
                         <i className="bi bi-lock-fill"></i>
-                        <input className={styles.input} type="password" id="reg-password" placeholder="Contraseña" name="password" required  value={registerData.password} onChange={handleRegisterChange}/>
+                        <input className={styles.input} type="password" id="reg-password" placeholder="Contraseña" name="password" required value={registerData.password} onChange={handleRegisterChange}/>
                     </div>
 
-                    <div className= {styles.inicio}>
+                    <div className={styles.inicio}>
                         <i className="bi bi-lock-fill"></i>
                         <input className={styles.input} type="password" id="confirm-password" name="confirmPassword" placeholder="Confirme la contraseña" required value={registerData.confirmPassword} onChange={handleRegisterChange}/>
                     </div>
