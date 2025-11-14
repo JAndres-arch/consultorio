@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import styles from './agregarpaciente.module.css';
 
 // 1. URL base del backend
-const API_BASE_URL = 'https://consultorio-backend-287o.onrender.com:5000';
+const API_BASE_URL = 'https://consultorio-backend-287o.onrender.com';
 
 const FormularioPaciente = () => {
     const navigate = useNavigate();

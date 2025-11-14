@@ -57,12 +57,12 @@ function RecetaForm() {
 
         const cargarDatosCompletos = async (cId) => {
             try {
-                const resConsulta = await axios.get(`https://consultorio-backend-287o.onrender.com:5000/api/consultas/${cId}`, config);
+                const resConsulta = await axios.get(`https://consultorio-backend-287o.onrender.com/api/consultas/${cId}`, config);
                 const consultaData = resConsulta.data;
                 setConsulta(consultaData);
-                const resPaciente = await axios.get(`https://consultorio-backend-287o.onrender.com:5000/api/pacientes/${consultaData.paciente_id}`, config);
+                const resPaciente = await axios.get(`https://consultorio-backend-287o.onrender.com/api/pacientes/${consultaData.paciente_id}`, config);
                 setPaciente(resPaciente.data);
-                const resDoctor = await axios.get(`https://consultorio-backend-287o.onrender.com:5000/api/usuario/actual`, config);
+                const resDoctor = await axios.get(`https://consultorio-backend-287o.onrender.com/api/usuario/actual`, config);
                 setDoctor(resDoctor.data);
                 setTalla(consultaData.exp_talla || '');
                 setPeso(consultaData.exp_peso || '');
@@ -81,9 +81,9 @@ function RecetaForm() {
 
         const cargarDatosSimples = async (pId) => {
             try {
-                const resPaciente = await axios.get(`https://consultorio-backend-287o.onrender.com:5000/api/pacientes/${pId}`, config);
+                const resPaciente = await axios.get(`https://consultorio-backend-287o.onrender.com/api/pacientes/${pId}`, config);
                 setPaciente(resPaciente.data);
-                const resDoctor = await axios.get(`https://consultorio-backend-287o.onrender.com:5000/api/usuario/actual`, config);
+                const resDoctor = await axios.get(`https://consultorio-backend-287o.onrender.com/api/usuario/actual`, config);
                 setDoctor(resDoctor.data);
                 setLoading(false);
             } catch (err) {
@@ -137,7 +137,7 @@ function RecetaForm() {
             indicaciones_adicionales: indicaciones
         };
         try {
-            await axios.post('https://consultorio-backend-287o.onrender.com:5000/api/recetas', datosReceta, config);
+            await axios.post('https://consultorio-backend-287o.onrender.com/api/recetas', datosReceta, config);
             alert("Receta guardada exitosamente");
             navigate('/pacientes');
         } catch (err) {
