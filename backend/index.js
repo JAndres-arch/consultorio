@@ -21,7 +21,7 @@ const allowedOrigins =[
     'http://192.168.0.133:5173',
     'http://192.168.0.117:5173',
     'http://192.168.1.122:5173',
-    'https://consultorio-frontend.onrender.com' // URL del frontend para CORS
+    'https://consultorio-frontend.onrender.com'
 ];
 
 app.use(cors({
@@ -35,8 +35,13 @@ app.use(cors({
 }));
 app.use(express.json()); 
 
+// Función de ayuda para convertir "" (string vacío) a NULL
+// CRÍTICA para campos INT y DATE en PostgreSQL.
+const valorONull = (valor) => (valor === '' || valor === undefined ? null : valor);
+
+
 // =========================================================================
-// RUTA DE REGISTRO (Usuario) - 🛠️ LOG CORREGIDO
+// RUTA DE REGISTRO (Usuario) 
 // =========================================================================
 app.post('/api/register', async (req, res) => {
     try {
@@ -56,7 +61,6 @@ app.post('/api/register', async (req, res) => {
             return res.status(400).json({ error: "El email o la cédula ya están registrados." });
         }
         
-        // 🚨 CAMBIO DE LOG: Imprime el error completo de PostgreSQL
         console.error("--- ERROR FATAL DE REGISTRO DE USUARIO ---", err); 
         console.error("MENSAJE SQL:", err.message);
         console.error("------------------------------------------");
@@ -66,7 +70,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 // =========================================================================
-// RUTA DE REGISTRO (Paciente) - 🛠️ LOG CORREGIDO
+// RUTA DE REGISTRO (Paciente) - 🛠️ ARREGLO DE EDAD Y FECHA
 // =========================================================================
 app.post('/api/pacientes/registrar', async (req, res) => {
     try {
@@ -74,7 +78,7 @@ app.post('/api/pacientes/registrar', async (req, res) => {
             no_expediente, 
             nombre_paciente,
             fecha_nacimiento, 
-            edad,
+            edad,             
             direccion, 
             telefono,
             nombre_familiar, 
@@ -87,6 +91,10 @@ app.post('/api/pacientes/registrar', async (req, res) => {
             estado_civil, 
             usuario_id
         } = req.body;
+
+        // 🚨 ARREGLO CLAVE: Procesar DATE y INT para evitar el error de formato/nulo
+        const fechaNacimientoProcesada = valorONull(fecha_nacimiento);
+        const edadProcesada = valorONull(edad);
         
         const nuevoPaciente = await pool.query(
             `INSERT INTO paciente (
@@ -100,8 +108,8 @@ app.post('/api/pacientes/registrar', async (req, res) => {
                 no_expediente,      
                 nombre_paciente,    
                 telefono,           
-                fecha_nacimiento,   
-                edad,               
+                fechaNacimientoProcesada, // 🚨 VALOR PROCESADO (DATE)
+                edadProcesada,            // 🚨 VALOR PROCESADO (INT)
                 direccion,          
                 nombre_familiar,    
                 telefono_familiar,  
@@ -126,7 +134,6 @@ app.post('/api/pacientes/registrar', async (req, res) => {
             return res.status(400).json({ error: "El número de expediente ya está registrado." });
         }
         
-        // 🚨 CAMBIO DE LOG: Imprime el error completo de PostgreSQL
         console.error("--- ERROR FATAL DE REGISTRO DE PACIENTE ---", err); 
         console.error("MENSAJE SQL:", err.message);
         console.error("------------------------------------------");
@@ -137,7 +144,7 @@ app.post('/api/pacientes/registrar', async (req, res) => {
 
 
 // =========================================================================
-// RUTA DE LOGIN - 🛠️ LOG CORREGIDO
+// RUTA DE LOGIN
 // =========================================================================
 app.post('/api/login', async (req, res) => {
     try {
@@ -155,7 +162,6 @@ app.post('/api/login', async (req, res) => {
         const token = jwt.sign( { id: user.usuario_id, email: user.email }, jwtSecret, { expiresIn: '1h' } );
         res.json({ token, user: { id: user.usuario_id, nombre: user.nombre, email: user.email } });
     } catch (err) {
-        // 🚨 CAMBIO DE LOG: Imprimimos el objeto de error completo para verlo en Render
         console.error("--- ERROR FATAL DE LOGIN ---", err);
         console.error("MENSAJE SQL:", err.message);
         console.error("----------------------------------");
@@ -165,7 +171,7 @@ app.post('/api/login', async (req, res) => {
 
 
 // =========================================================================
-// MIDDLEWARE DE PROTECCIÓN
+// MIDDLEWARE DE PROTECCIÓN Y RUTAS RESTANTES...
 // =========================================================================
 const authorize = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -180,9 +186,6 @@ const authorize = (req, res, next) => {
 };
 
 
-// =========================================================================
-// RUTA PARA OBTENER TODOS LOS PACIENTES (PROTEGIDA)
-// =========================================================================
 app.get('/api/pacientes', authorize, async (req, res) => {
     try {
         const result = await pool.query("SELECT * FROM paciente ORDER BY nombre_paciente ASC");
@@ -193,9 +196,6 @@ app.get('/api/pacientes', authorize, async (req, res) => {
     }
 });
 
-// =========================================================================
-// RUTA PARA OBTENER UN SOLO PACIENTE (requerida por RecetaForm)
-// =========================================================================
 app.get('/api/pacientes/:id', authorize, async (req, res) => {
     try {
         const { id } = req.params;
@@ -205,7 +205,7 @@ app.get('/api/pacientes/:id', authorize, async (req, res) => {
         );
 
         if (result.rows.length === 0) {
-            return res.status(404).json({ message: "Paciente no encontrado" });
+            return res.status(404).json({ error: "Paciente no encontrado" });
         }
         
         res.json(result.rows[0]); 
@@ -216,15 +216,10 @@ app.get('/api/pacientes/:id', authorize, async (req, res) => {
     }
 });
 
-// =========================================================================
-// --- ¡RUTA NUEVA! ---
-// RUTA PARA OBTENER UNA SOLA CONSULTA (para la receta automática)
-// =========================================================================
 app.get('/api/consultas/:id', authorize, async (req, res) => {
     try {
         const { id } = req.params;
         const result = await pool.query(
-            // Cargamos todos los datos de la consulta
             "SELECT * FROM consulta WHERE consulta_id = $1",
             [id]
         );
@@ -233,7 +228,7 @@ app.get('/api/consultas/:id', authorize, async (req, res) => {
             return res.status(404).json({ message: "Consulta no encontrada" });
         }
         
-        res.json(result.rows[0]); // Envía el objeto de la consulta
+        res.json(result.rows[0]); 
 
     } catch (err) {
         console.error(`Error al obtener consulta ${req.params.id}:`, err.message);
@@ -242,9 +237,6 @@ app.get('/api/consultas/:id', authorize, async (req, res) => {
 });
 
 
-// =========================================================================
-// RUTA PARA ELIMINAR PACIENTE (Ahora también borra recetas)
-// =========================================================================
 app.delete('/api/pacientes/:id', authorize, async (req, res) => {
     const pacienteId = req.params.id;
     console.log(`[DELETE FORZOSO] Solicitud para eliminar paciente ID: ${pacienteId} y TODOS sus registros.`);
@@ -300,9 +292,6 @@ app.delete('/api/pacientes/:id', authorize, async (req, res) => {
     }
 });
 
-// =========================================================================
-// RUTA PROTEGIDA (Datos del Usuario/Doctor para la Receta)
-// =========================================================================
 app.get('/api/usuario/actual', authorize, async (req, res) => {
     try {
         const result = await pool.query(
@@ -322,12 +311,6 @@ app.get('/api/usuario/actual', authorize, async (req, res) => {
     }
 });
 
-
-// =========================================================================
-// RUTA PARA GUARDAR LA CONSULTA (Historia Clínica)
-// =========================================================================
-// RUTA PARA GUARDAR LA CONSULTA (Historia Clínica) - ¡CORREGIDA!
-// =========================================================================
 app.post('/api/consultas/registrar', authorize, async (req, res) => {
     const { id: usuario_id } = req.user; 
     const {
@@ -345,7 +328,6 @@ app.post('/api/consultas/registrar', authorize, async (req, res) => {
         diagnostico
     } = req.body;
 
-    // --- ¡AQUÍ ESTÁ LA CORRECCIÓN! ---
     // Función de ayuda para convertir "" (string vacío) a NULL
     const valorONull = (valor) => (valor === '' || valor === undefined ? null : valor);
 
@@ -370,8 +352,7 @@ app.post('/api/consultas/registrar', authorize, async (req, res) => {
         ) RETURNING consulta_id
     `;
     
-    // --- ¡AQUÍ SE USA LA CORRECCIÓN! ---
-    // Aplicamos la función 'valorONull' a todos los campos numéricos
+    // Aplicamos la función 'valorONull' a los campos numéricos.
     const values = [
         paciente_id, usuario_id,
         ant_diabetes, ant_arterial, ant_tiroidales, ant_otro,
@@ -402,10 +383,6 @@ app.post('/api/consultas/registrar', authorize, async (req, res) => {
     }
 });
 
-// =========================================================================
-// --- ¡RUTA MODIFICADA! ---
-// RUTA PARA GUARDAR LA NUEVA RECETA (ahora acepta consulta_id)
-// =========================================================================
 app.post('/api/recetas', authorize, async (req, res) => {
     try {
         const { 
@@ -441,9 +418,6 @@ app.post('/api/recetas', authorize, async (req, res) => {
     }
 });
 
-// =========================================================================
-// RUTA DE PRUEBA (No protegida)
-// =========================================================================
 app.get('/apipaciente', (req, res) => {
     const sql = "SELECT paciente_id, no_expediente, fecha_nacimiento, edad FROM paciente";
     
