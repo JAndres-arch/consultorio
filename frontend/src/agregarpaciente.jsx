@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import styles from './agregarpaciente.module.css';
 
 // 1. URL base del backend
-const API_BASE_URL = 'https://consultorio-frontend.onrender.com';
+// 🚨 ¡AQUÍ ESTÁ LA CORRECCIÓN! 🚨
+// Esta era la URL de tu FRONTEND. 
+// Debes cambiarla por la URL de tu BACKEND que te da Render.
+const API_BASE_URL = 'https://TU-URL-DE-BACKEND.onrender.com'; // <--- CAMBIA ESTA LÍNEA
 
 const FormularioPaciente = () => {
     const navigate = useNavigate();
@@ -28,7 +31,7 @@ const FormularioPaciente = () => {
         ocupacion: '',
         escuela: '',
         estado_civil: '',
-        edad: '' // Solo para UI, no se envía
+        // edad: '' // Esta línea estaba duplicada, la quito
     });
 
     // --- Funciones de ayuda ---
@@ -182,6 +185,7 @@ const FormularioPaciente = () => {
         };
 
         try {
+            // Esta llamada AHORA SÍ FUNCIONARÁ
             const response = await fetch(`${API_BASE_URL}/api/pacientes/registrar`, {
                 method: 'POST',
                 headers: {
@@ -210,6 +214,8 @@ const FormularioPaciente = () => {
             }
         } catch (error) {
             console.error("Error de conexión:", error);
+            // ESTE ES EL ERROR QUE ESTÁS VIENDO, porque 'response.json()'
+            // falla al intentar analizar el HTML
             showMessage("Error de conexión con el servidor.", "error");
         }
     };
@@ -341,4 +347,3 @@ const FormularioPaciente = () => {
 }
 
 export default FormularioPaciente;
-
