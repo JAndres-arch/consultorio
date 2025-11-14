@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.css';
 
-const API_BASE_URL = 'https://consultorio-backend-287o.onrender.com/api'
+const API_BASE_URL = 'https://consultorio-frontend.onrender.com/api'
 
 const Login = () => {
     const navigate = useNavigate();
