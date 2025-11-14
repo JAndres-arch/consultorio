@@ -55,6 +55,7 @@ app.post('/api/register', async (req, res) => {
             [nombre, email, cedu, telefono, contrasenaHasheada] 
         );
         const usuarioCreado = nuevoUsuario.rows[0];
+        // RESPUESTA JSON (CORRECTO)
         res.status(201).json({ message: "Usuario registrado con éxito.", user: usuarioCreado });
     } catch (err) {
         if (err.code === '23505') {
@@ -72,6 +73,10 @@ app.post('/api/register', async (req, res) => {
 // =========================================================================
 // RUTA DE REGISTRO (Paciente) - 🛠️ ARREGLO DE EDAD Y FECHA
 // =========================================================================
+//
+// ➡️ ¡ESTA ES LA RUTA QUE TU FRONTEND DEBERÍA ESTAR LLAMANDO!
+// TU FRONTEND ESTÁ LLAMANDO A '/registrar', PERO DEBERÍA LLAMAR A '/api/pacientes/registrar'
+//
 app.post('/api/pacientes/registrar', async (req, res) => {
     try {
         const { 
@@ -104,26 +109,27 @@ app.post('/api/pacientes/registrar', async (req, res) => {
              ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
              RETURNING paciente_id, nombre_paciente`,
             [
-                usuario_id,         
-                no_expediente,      
-                nombre_paciente,    
-                telefono,           
+                usuario_id,         
+                no_expediente,      
+                nombre_paciente,    
+                telefono,           
                 fechaNacimientoProcesada, // 🚨 VALOR PROCESADO (DATE)
                 edadProcesada,            // 🚨 VALOR PROCESADO (INT)
-                direccion,          
-                nombre_familiar,    
-                telefono_familiar,  
-                genero,             
-                embarazo,           
-                sangineo,           
-                ocupacion,          
-                escuela,            
-                estado_civil        
+                direccion,          
+                nombre_familiar,    
+                telefono_familiar,  
+                genero,             
+                embarazo,           
+                sangineo,           
+                ocupacion,          
+                escuela,            
+                estado_civil        
             ]
         );
         
         const pacienteCreado = nuevoPaciente.rows[0];
         
+        // RESPUESTA JSON (CORRECTO)
         res.status(201).json({ 
             message: "Paciente registrado con éxito.", 
             paciente: pacienteCreado 
@@ -160,6 +166,7 @@ app.post('/api/login', async (req, res) => {
         if (!isMatch) return res.status(400).json({ error: "Credenciales inválidas." });
 
         const token = jwt.sign( { id: user.usuario_id, email: user.email }, jwtSecret, { expiresIn: '1h' } );
+        // RESPUESTA JSON (CORRECTO)
         res.json({ token, user: { id: user.usuario_id, nombre: user.nombre, email: user.email } });
     } catch (err) {
         console.error("--- ERROR FATAL DE LOGIN ---", err);
@@ -340,7 +347,7 @@ app.post('/api/consultas/registrar', authorize, async (req, res) => {
             ant_enf_infancia, ant_enf_clinicas, ant_alergicos, ant_transfusiones,
             ant_traumatismo, ant_quirurgicos, padecimiento_actual,
             sis_digestivo, sis_respiracion, sis_cardio_vascular, sis_sistema_nervioso,
-            sis_genitourinario, sis_musc_esquelet, sis_endocrino, sis_piel_anexos,
+            sis_genituroinario, sis_musc_esquelet, sis_endocrino, sis_piel_anexos,
             comentarios_finales,
             nota_motivo, nota_padecimiento, nota_exploracion_fisica,
             exp_peso, exp_talla, sv_temp, sv_fr, sv_ta, sv_fc, sv_spo2, sv_gluc,
@@ -361,7 +368,7 @@ app.post('/api/consultas/registrar', authorize, async (req, res) => {
         ant_enf_infancia, ant_enf_clinicas, ant_alergicos, ant_transfusiones,
         ant_traumatismo, ant_quirurgicos, padecimiento_actual,
         sis_digestivo, sis_respiracion, sis_cardio_vascular, sis_sistema_nervioso,
-        sis_genitourinario, sis_musc_esquelet, sis_endocrino, sis_piel_anexos,
+        sis_genituroinario, sis_musc_esquelet, sis_endocrino, sis_piel_anexos,
         comentarios_finales,
         nota_motivo, nota_padecimiento, nota_exploracion_fisica,
         // Campos numéricos convertidos a NULL si están vacíos
