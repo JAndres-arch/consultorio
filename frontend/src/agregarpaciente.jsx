@@ -8,7 +8,7 @@ import styles from './agregarpaciente.module.css';
 // 🚨 ¡AQUÍ ESTÁ LA CORRECCIÓN! 🚨
 // Esta era la URL de tu FRONTEND. 
 // Debes cambiarla por la URL de tu BACKEND que te da Render.
-const API_BASE_URL = 'https://TU-URL-DE-BACKEND.onrender.com'; // <--- CAMBIA ESTA LÍNEA
+const API_BASE_URL = 'https://consultorio-backend-287o.onrender.com'; // <--- CAMBIA ESTA LÍNEA
 
 const FormularioPaciente = () => {
     const navigate = useNavigate();
