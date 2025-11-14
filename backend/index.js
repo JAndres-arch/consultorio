@@ -11,7 +11,7 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const jwtSecret = process.env.JWT_SECRET || 'clave_secreta_de_desarrollo_insegura_cambiala'; 
+const jwtSecret = process.env.PORT || 'clave_secreta_de_desarrollo_insegura_cambiala'; 
 
 const allowedOrigins =[
     'http://localhost:5173',
@@ -36,6 +36,7 @@ app.use(cors({
 app.use(express.json()); 
 
 // Función de ayuda para convertir "" (string vacío) a NULL
+// CRÍTICA para campos INT y DATE en PostgreSQL.
 const valorONull = (valor) => (valor === '' || valor === undefined || valor === null ? null : valor);
 
 
