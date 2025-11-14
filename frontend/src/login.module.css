@@ -1,0 +1,230 @@
+.contenedorr {
+  border: 5px solid black;
+  position: relative;
+  height: 70vh;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 30px rgb(0, 0, 0, .4);
+  padding: 10px;
+}
+
+/* Login */
+
+.contenedor,
+.regcontenedor {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  transition: 1.8s ease-in-out;
+  left: 0;
+  top: 0;
+}
+
+.formulario,
+.regformulario {
+  height: auto;
+  width: 100%;
+  padding: 10px;
+}
+
+.loginh1,
+.regh1 {
+  font-size: 2.3rem;
+}
+
+.inicio {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  padding: 3px;
+  padding-left: 35px;
+  font-size: 16px;
+  margin-top: 10px;
+  outline: none;
+}
+
+.inicio i {
+  position: absolute;
+  top: 14px;
+  left: 10px;
+  font-size: 17px;
+}
+
+/* === BOTONES ===*/
+.aceptar,
+.registrarse,
+.aceptar2,
+.regresar {
+  margin-top: 10px;
+  display: block;
+  font-size: 1.3rem;
+  margin: 20px auto;
+
+  background: #000000;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: box-shadow .15s, transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 18px;
+}
+
+.aceptar:focus,
+.registrarse:focus,
+.aceptar2:focus,
+.regresar:focus {
+  box-shadow: #ff35f5 0 0 0 1.5px inset, rgb(255, 9, 255) 0 2px 4px, rgba(194, 72, 188, 0.288) 0 7px 13px -3px, #da3ce0 0 -3px 0 inset;
+}
+
+.aceptar:hover,
+.registrarse:hover,
+.aceptar2:hover,
+.regresar:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #c55cc9 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.aceptar:active,
+.registrarse:active,
+.aceptar2:active .regresar:active {
+  box-shadow: #070707 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+/*Registro*/
+.oculto {
+  display: none;
+}
+
+
+.mensaje {
+  font-size: 11px;
+  padding: 12px;
+  top: -82%;
+  border-radius: 20px;
+  display: none;
+  transition: all 0.4s ease;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  padding-left: 45px;
+  margin-left: 10%;
+}
+
+/* Ícono común para el mensaje */
+.mensaje::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+/* Estilo para error */
+.mensaje.error {
+  background-color: rgba(243, 6, 6, 0.26);
+  color: #cc0000;
+  display: block;
+}
+
+.mensaje.error::before {
+  content: "❌";
+}
+
+/* Estilo para éxito */
+.mensaje.success {
+  background-color: rgba(252, 251, 251, 0.26);
+  color: #006600;
+  display: block;
+}
+
+.mensaje.success::before {
+  content: "✔️";
+}
+
+@media screen and (min-width: 1200px) {
+  .inicio i{
+    margin-top: 5px;
+  }
+
+  .input{
+    height: 40px;
+  }
+
+  .aceptar,
+  .registrarse,
+  .aceptar2,
+  .regresar {
+    background-color: #000;
+    display: inline-flex;
+    margin: 30px 20px;
+    font-size: 1.2rem;
+  }
+
+}
+
+@media screen and (min-width: 1024px) {
+  .contenedorr {
+    width: 50%;
+  }
+
+  .regh1 {
+    margin-top: 5%;
+  }
+
+  .aceptar2,
+  .regresar {
+    background-color: #000;
+    display: inline-flex;
+    margin: 20px;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .loginh1 {
+    font-size: 3.5rem;
+  }
+
+  .inicio {
+    margin-top: 10px;
+  }
+
+  .inicio i {
+    font-size: 1.1rem;
+    top: 16px;
+  }
+
+  .input {
+    width: 100%;
+    padding: 5px;
+    padding-left: 30px;
+    font-size: 1.2rem;
+  }
+
+  .aceptar,
+  .registrarse,
+  .aceptar2 .regresar {
+    font-size: 2rem;
+  }
+}

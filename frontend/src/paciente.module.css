@@ -1,0 +1,52 @@
+.contenedorpaciente h2{
+    margin-top: 20px;
+    text-align: center;
+}
+/* 1. LA TARJETA (El contenedor padre) */
+.tarjetapaciente {
+  display: flex;        /* Pone a sus 2 hijos (icono e info) en fila */
+  flex-direction: row;  /* (Esta es la dirección por defecto) */
+  align-items: center;  /* Centra el icono verticalmente con el bloque de texto */
+  
+  /* Tus estilos */
+  margin-top: 10px;
+  border-bottom: 3px solid black;
+  padding: 10px 10px;
+  overflow: hidden; 
+}
+
+/* 2. EL ICONO */
+.iconotarjeta {
+  font-size: 3rem; 
+  margin-right: 10px;
+  flex-shrink: 0; /* Evita que el icono se encoja */
+}
+
+/* 3. EL BLOQUE DE INFO (¡Esta es la respuesta a tu pregunta!) */
+.tarjetainfo {
+  display: flex;
+  flex-direction: column; /* ¡AQUÍ ESTÁ! Apila el texto verticalmente */
+  justify-content: center; /* Centra el texto verticalmente (opcional) */
+  
+  /* Esto arregla el desbordamiento de texto */
+  flex-grow: 1;
+  min-width: 0;
+}
+
+/* 4. LOS TEXTOS (Para que se vean bien y no se desborden) */
+.p, .nombre, .edad {
+  margin: 0; /* Quita márgenes para que no se separen */
+  
+  /* Arregla el texto largo que se ve en tu captura */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+.p { font-size: 0.9rem; }
+.nombre { font-size: 1rem;}
+.edad { font-size: 1rem; }
+
+.botonEliminar{
+  margin: 10px;
+}

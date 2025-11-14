@@ -1,0 +1,136 @@
+.nav {
+  display: flex;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.664);
+  box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 1);
+  justify-content: center;
+  align-items: center;
+}
+
+.navh1 {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.6rem;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.icono {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 28px;
+  margin: auto 5px;
+}
+
+.icono i {
+  font-size: 1.5rem;
+}
+
+/*Menu*/
+.menu{
+  position: relative;
+}
+
+.menuflotante{
+  position: absolute;
+  height: 50%;
+  width: 80%;
+  top: 1.5%;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.61);
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 1);
+  backdrop-filter: blur(4px);
+  border-radius: 0 20px 10px 0;
+}
+
+.close{
+  position: relative;
+}
+
+.close i{
+  position: absolute;
+  text-align: right;
+  font-size: 2rem;
+  right: 10px;
+}
+
+.lu{
+  list-style-type: none;
+  margin-top: 50px;
+}
+
+.li{
+  margin-top: 10px;
+}
+
+.cerrar{
+  position: relative;
+}
+
+.cerrar i{
+  position: absolute;
+  top: 15px;
+  left: 10px;
+}
+
+.secion{
+  padding-left: 35px;
+  width: 50%;
+  margin-top: 10px;
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 10px;
+}
+
+.opciones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+}
+
+.paciente,
+.cita {
+  text-align: center;
+  width: 100%;
+  font-size: 1rem;
+  margin-left: 5%;
+  margin-right: 3%;
+  border: 2px solid black;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: white;
+  text-decoration: none;
+  color: black;
+}
+
+.tabla {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caption {
+  margin-top: 1em;
+  font-size: 2rem;
+}
+
+.sup {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+@media screen and (min-width: 576) {
+  .nav {
+    padding: 10px 20px;
+  }
+
+  .icono i {
+    font-size: 1.4;
+  }
+}

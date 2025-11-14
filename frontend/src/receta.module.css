@@ -1,0 +1,259 @@
+/*
+ * ===========================================
+ * ESTILOS BASE (MÓVIL)
+ * ===========================================
+ * Estos son los estilos por defecto para celulares.
+ */
+
+.contenedor {
+    width: 100%;
+    margin: 1rem auto;
+    padding: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f7f6;
+    box-sizing: border-box; /* Asegura que el padding no desborde */
+}
+
+/* --- Formulario de Edición --- */
+.contenedorFormulario {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem; /* Más padding en móvil */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.tituloEditor {
+    text-align: center;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.grupoForm {
+    margin-bottom: 1.25rem;
+}
+
+.grupoForm label {
+    display: block;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.contenedorFormulario input[type="text"],
+.contenedorFormulario input[type="number"],
+.contenedorFormulario textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #CED4DA;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.contenedorFormulario input[type="text"]:focus,
+.contenedorFormulario input[type="number"]:focus,
+.contenedorFormulario textarea:focus {
+    border-color: #007BFF;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.inputBloqueado {
+    background-color: #E9ECEF;
+    cursor: not-allowed;
+}
+
+/* Signos Vitales (2 columnas en móvil) */
+.signosVitales {
+    border: 1px solid #CED4DA;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+.signosVitales legend {
+    font-weight: 600;
+    color: #0056b3;
+    padding: 0 0.5rem;
+}
+.gridVitales {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas en móvil */
+    gap: 1rem;
+}
+.gridVitales div {
+    display: flex;
+    flex-direction: column;
+}
+.gridVitales label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+/* Botones (apilados en móvil) */
+.grupoBotones {
+    display: flex;
+    flex-direction: column; /* Apilados */
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+.botonGuardar, .botonImprimir {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.botonGuardar { background-color: #28a745; color: white; }
+.botonGuardar:hover { background-color: #218838; }
+.botonImprimir { background-color: #007BFF; color: white; }
+.botonImprimir:hover { background-color: #0056b3; }
+
+/* --- Vista Previa Imprimible (Móvil) --- */
+.divisor {
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid #E0E0E0;
+}
+.vistaImprimible {
+    background: #FFFFFF;
+    border: 1px solid #DEE2E6;
+    padding: 20px; /* Menos padding en móvil */
+    font-family: 'Times New Roman', Times, serif;
+    color: #000;
+}
+
+/* Encabezado (apilado en móvil) */
+.encabezadoReceta {
+    display: flex;
+    flex-direction: column; /* Apilado */
+    border-bottom: 2px solid #333;
+    padding-bottom: 1rem;
+}
+.datosDoctor {
+    margin-bottom: 15px;
+}
+.datosDoctor h3 { margin: 0; font-size: 1.3rem; }
+.datosDoctor p { margin: 0; font-size: 0.9rem; }
+.tituloReceta {
+    text-align: left; /* Alineado a la izquierda en móvil */
+}
+.tituloReceta h2 { margin: 0; color: #003366; font-size: 1.6rem; }
+.tituloReceta p { margin: 0.25rem 0 0 0; font-size: 1rem; }
+
+/* Secciones (apiladas en móvil) */
+.seccionPaciente, .seccionVitales, .seccionDiagnostico, .seccionMedicamentos, .seccionIndicaciones {
+    border-bottom: 1px dotted #B0B0B0;
+    padding: 1rem 0;
+}
+.vistaImprimible h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.vistaImprimible p {
+    margin: 0;
+    font-size: 1rem;
+}
+.gridPaciente, .gridVitalesImpresion {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 columna en móvil */
+    gap: 5px;
+}
+.seccionMedicamentos .rp {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #003366;
+    float: left;
+    margin-right: 1rem;
+    line-height: 1;
+}
+.vistaImprimible pre {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    margin: 0;
+    padding: 0.5rem;
+    background-color: #F9F9F9;
+    border-radius: 4px;
+}
+.seccionIndicaciones pre {
+    background-color: transparent;
+    padding: 0;
+}
+
+/* Firma */
+.areaFirma {
+    margin-top: 4rem;
+    text-align: center;
+}
+.lineaFirma {
+    border-top: 1px solid #000;
+    width: 100%; /* Ancho completo en móvil */
+    max-width: 300px;
+    margin: 0 auto;
+    padding-top: 0.5rem;
+}
+.lineaFirma p { margin: 0; font-size: 0.9rem; }
+
+/*
+ * ===========================================
+ * ESTILOS TABLET (HORIZONTAL) Y MÁS GRANDE
+ * min-width: 769px
+ * ===========================================
+ */
+@media (min-width: 769px) {
+    .contenedorFormulario {
+        padding: 1.5rem 2rem;
+    }
+
+    /* Grid de vitales en 4 columnas */
+    .gridVitales {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Botones uno al lado del otro */
+    .grupoBotones {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    /* --- Vista Imprimible --- */
+    .vistaImprimible {
+        padding: 2.5rem; /* Más padding */
+    }
+    
+    .encabezadoReceta {
+        flex-direction: row; /* Uno al lado del otro */
+        align-items: flex-start;
+    }
+    
+    .tituloReceta {
+        text-align: right; /* Alineado a la derecha */
+    }
+
+    /* Grids de paciente y vitales en 3 columnas */
+    .gridPaciente {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+    .gridVitalesImpresion {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1025px) {
+    /* Centra el contenedor en pantallas grandes */
+    .contenedor {
+        max-width: 900px;
+        margin: 2rem auto;
+    }
+}

@@ -1,0 +1,44 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*======= ESTILOS GLOBALES AGREGAR PACIENTE =======*/
+#cuerpo.fondoagregarcita{
+  background: #fdf1f1;
+  height: 100%;
+}
+
+/*======= ESTILOS GLOBALES AGREGAR PACIENTE =======*/
+#root.fondopaciente{
+  min-height: 100vh;
+  background-image: url(../Consultorio.png);
+  background-position: 60%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/*======= ESTILOS GLOBALES INICIO =======*/
+#root.bienvenido{
+  min-height: 100vh;
+  background-image: url(../Consultorio.png);
+  background-size: cover;
+  background-position: 59%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/*======= ESTILOS GLOBALES lOGIN =======*/
+#root.fondologin{
+  min-height: 100vh;
+  background-image: url(./Consultorio.png);
+  background-position: 60%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}

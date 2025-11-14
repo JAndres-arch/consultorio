@@ -1,0 +1,90 @@
+.nav{
+    display: grid;
+    place-items: center;
+    border: 3px solid black;
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 50px;
+    background-color: rgba(255, 253, 253, 0.521);
+    backdrop-filter: blur(4px);
+}
+
+.nav h1{
+    position: relative;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.nav i{
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    font-size: 1.6rem;
+}
+
+/* Formulario */
+
+.contenedor{
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.contenedor h1{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.formuario_paciente{
+    margin: 10px auto;
+    width: 90%;
+}
+
+.grupo_expediente, .grupo_nombrepaciente, .grupo_fechanacimiento,
+.grupo_direccion, .grupo_telefono, .grupo_familia, .grupo_telfam,
+.gennero, .mujer, .sangineo, .grupo_ocup, .escolaridad, .Estado{
+    margin-top: 10px;
+}
+
+.input{
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 3px;
+    padding-left: 10px;
+    outline: none;
+}
+
+.resultadoo{
+    margin-top: 10px;
+}
+
+.genero, .sangre, .escuela, .estado_civil,
+.embarazo{
+    border-radius: 20px;
+    padding: 3px;
+    margin-left: 10px;
+}
+
+.sangineo i{
+    color: red;
+}
+
+.Agregar,
+.Cancelar{
+    margin-top: 10px;
+    display: block;
+    border: none;
+    background-color: transparent;
+    font-size: 1.3rem;
+    margin: 20px auto;
+}
+
+.Cancelar{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}

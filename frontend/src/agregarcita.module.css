@@ -1,0 +1,295 @@
+.persona{
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background-color: #eebbbb;
+    margin: 20px 10px;
+    padding: 10px 20px;
+    box-shadow: 5px 5px 15px 0 rgba(196, 57, 149, 0.582);
+}
+
+.person{
+    position: absolute;
+    left: 35px;
+    font-size: 2rem;
+    color: #C2185B
+}
+
+.persona h1{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2rem;
+    padding: 0 10px;
+    white-space: nowrap;
+    color: #C2185B;
+}
+
+
+/* Formulario */
+
+.Cita{
+    margin-top: 25px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #C2185B;
+}
+
+/* Botones de navegacion */
+
+.navee{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f6c8c7;
+    margin-top: 10px;
+}
+
+.ante, .inter, .nota{
+    margin: 15px 5px;
+    border: none;
+    background: transparent;
+    transition: background-color 0.1s;
+    font-size: 0.6rem;
+}
+
+/* Formulario */
+
+/* ==== Tabla Herederos ==== */
+.tableheredo, .tablepersonales, .tablepatologicos, .aparatsistema{
+    table-layout: fixed;
+    width: 90%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+.tableheredo thead, .tablepersonales thead, .tablepatologicos thead,
+.aparatsistema thead{
+    margin-top: 20px;
+}
+
+.tableheredo th, .tablepersonales th, .tablepatologicos th,
+.aparatsistema th{
+    border: solid #62152d;
+    border-bottom: none;
+    color: #f06292;
+}
+
+.tableheredo td, .tablepersonales td, .tablepatologicos td,
+.aparatsistema td{
+    border-top: none;
+    border: solid #62152d;
+}
+
+.tableheredo input, .tablepersonales input, .tablepatologicos input,
+.aparatsistema input{
+    background: transparent;
+    padding-left: 5px;
+    border: none;
+    outline: none;
+    color: #62152d;
+}
+
+.tableheredo caption, .tablepersonales caption, .tablepatologicos caption,
+.aparatsistema caption{
+    font-size: 1.3rem;
+    color: #f06292;
+}
+
+.pademedico, .comentafinal{
+    text-align: center;
+    font-size: 1.5rem;
+    color: #f06292;
+    width: 90%;
+    margin: 20px  auto;
+}
+
+.trata{
+    height: 100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px;
+    outline: none;
+    background: transparent;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+/* ==== Nota Medica ====*/
+.notmedic{
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.notmedic h2{
+    font-size: 1.5rem;
+    color: #f06292;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Interrogatorio */
+.motivo, .pade, .fisi{
+    margin-top: 15px;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.motivo label{
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    color:  rgba(83, 81, 81, 0.63);
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.pade label{
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    color:  rgba(83, 81, 81, 0.63);
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.fisi label{
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    color:  rgba(83, 81, 81, 0.63);
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.motivo input, .pade input, .fisi input{
+    margin-top: 5px;
+    width: 100%;
+    padding: 5px;
+    border: 2px solid black;
+    background: transparent;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Para posicionar el lbel arriba */
+.motivo input:focus + label,
+.pade input:focus + label,
+.fisi input:focus + label{
+    top:  -5px;
+    left: 7px;
+    font-size: 1.1rem;
+    padding: 0 5px;
+    color: #f06292;
+}
+
+.motivo input:not(:placeholder-shown) + label, 
+.pade input:not(:placeholder-shown) + label, 
+.fisi input:not(:placeholder-shown) + label {
+  top: -5px; 
+  left: 7px;
+  font-size: 1.1rem;
+  padding: 0 5px;
+  color: #f06292;
+}
+
+/* Exploracion */
+.peso, .talla{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.peso input, .talla input{
+    margin: auto 5px;
+    width: 30%;
+    padding: 2px;
+}
+
+/* Signos Vitales*/
+.temp, .fr, .ta, .fc, .SP, .gluc{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.temp input, .fr input, .ta input, .fc input, .SP input, .gluc input{
+    margin: auto 5px;
+    width: 30%;
+    padding: 2px;
+}
+
+
+.fr, .fc{
+    margin-left: 14%;
+}
+
+.ta{
+    margin-left: 17%;
+}
+
+.SP{
+    margin-left: 1%;
+}
+
+.gluc{
+    margin-left: 10%;
+}
+
+.env{
+  display: block;
+  margin: 20px auto;
+  border: none;
+  background: transparent;
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: black;
+}
+
+/* Acciones de botones */
+
+/* Barra de Nvaegacion  */
+.ante.activo, .inter.activo{
+    background-color: #62152d;
+    color: white;
+    padding: 5px;
+    height: 50px;
+    margin-top: 15px;
+    margin-left: 0;
+}
+
+.nota.activo{
+    background-color: #62152d;
+    color: white;
+    padding: 5px;
+    height: 50px;
+    margin-top: 15px;
+    margin-right: 0;
+    margin-left: 3.9%;
+}
+
+@media screen and (min-width: 1200px) {
+    
+}
+
+@media screen and (min-width: 900px) {
+}
+
+
+@media screen and (min-width: 768px) {
+    .Cita{
+        margin-top: 50px;
+        text-align: center;
+        font-size: 2.6em;
+    }
+
+    .navee{
+        margin-top: 20px;
+    }
+
+    .ante, .inter, .nota{
+        font-size: 1rem;
+    }
+}
