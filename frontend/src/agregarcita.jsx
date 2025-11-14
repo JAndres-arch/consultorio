@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import styles from './agregarcita.module.css';
 
 // ¡CORREGIDO!: Apuntar al puerto 5000 (Backend)
-const API_BASE_URL = 'https://consultorio-backend-287o.onrender.com/:5000'; // (Asegúrate que esta sea la IP de tu backend)
+const API_BASE_URL = 'https://consultorio-backend-287o.onrender.com:5000'; // (Asegúrate que esta sea la IP de tu backend)
 
 const FormularioAgregarcita = () =>{
     const navigate = useNavigate();

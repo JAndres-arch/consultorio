@@ -21,7 +21,7 @@ const allowedOrigins =[
     'http://192.168.0.133:5173',
     'http://192.168.0.117:5173',
     'http://192.168.1.122:5173',
-    'https://consultorio-backend-287o.onrender.com/'
+    'https://consultorio-backend-287o.onrender.com'
 ];
 
 app.use(cors({
