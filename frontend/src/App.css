@@ -13,7 +13,7 @@
 /*======= ESTILOS GLOBALES AGREGAR PACIENTE =======*/
 #root.fondopaciente{
   min-height: 100vh;
-  background-image: url(../Consultorio.png);
+  background-image: url(/Consultorio.png);
   background-position: 60%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,7 +23,7 @@
 /*======= ESTILOS GLOBALES INICIO =======*/
 #root.bienvenido{
   min-height: 100vh;
-  background-image: url(../Consultorio.png);
+  background-image: url(/Consultorio.png);
   background-size: cover;
   background-position: 59%;
   background-repeat: no-repeat;
@@ -33,7 +33,7 @@
 /*======= ESTILOS GLOBALES lOGIN =======*/
 #root.fondologin{
   min-height: 100vh;
-  background-image: url(./Consultorio.png);
+  background-image: url(/Consultorio.png);
   background-position: 60%;
   background-repeat: no-repeat;
   background-size: cover;
