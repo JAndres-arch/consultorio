@@ -3,6 +3,13 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import styles from './paciente.module.css';
 
+// ==========================================================
+//           ⬇️ ¡ESTA ES LA CORRECCIÓN! ⬇️
+// Esta es la URL de tu BACKEND en Render.
+const API_BASE_URL = 'https://consultorio-backend-287o.onrender.com';
+// ==========================================================
+
+
 // --- Función para calcular la edad ---
 function calcularEdad(fechaNacimientoStr) {
     if (!fechaNacimientoStr) return 'Edad no disponible';
@@ -59,8 +66,10 @@ function ListaPacientes() {
     };
 
     try {
-      // (Asumiendo que tu IP es 192.168.1.71, cámbiala si es necesario)
-      await axios.delete(`https://consultorio-backend-287o.onrender.com/api/pacientes/${idPaciente}`, config);
+      // ==========================================================
+      //           ⬇️ ¡ESTA ES LA CORRECCIÓN! ⬇️
+      await axios.delete(`${API_BASE_URL}/api/pacientes/${idPaciente}`, config);
+      // ==========================================================
       
       // Actualiza el estado para quitar al paciente de la lista
       setPacientes(pacientesActuales => 
@@ -95,9 +104,12 @@ function ListaPacientes() {
       }
     };
 
-    // (Asumiendo que tu IP es 192.168.1.71, cámbiala si es necesario)
-    axios.get('https://consultorio-frontend.onrender.com/api/pacientes', config) 
+    // ==========================================================
+    //           ⬇️ ¡ESTA ES LA CORRECCIÓN! ⬇️
+    axios.get(`${API_BASE_URL}/api/pacientes`, config) 
+    // ==========================================================
       .then(res => {
+        // 'res.data' ahora SÍ será un array [ ... ]
         setPacientes(res.data);
         setLoading(false); 
       })
@@ -125,6 +137,8 @@ function ListaPacientes() {
     <div className={styles.contenedorpaciente}>
         <h2>Registro de Pacientes</h2>
         <div className={styles.tarjetas}>
+            
+            {/* Este .map() ahora funcionará */}
             {pacientes.map(paciente => (
                 <div className={styles.tarjetapaciente} key={paciente.paciente_id}>
                     
