@@ -60,7 +60,7 @@ function ListaPacientes() {
 
     try {
       // (Asumiendo que tu IP es 192.168.1.71, cámbiala si es necesario)
-      await axios.delete(`https://consultorio-frontend.onrender.com/api/pacientes/${idPaciente}`, config);
+      await axios.delete(`https://consultorio-backend-287o.onrender.com/api/pacientes/${idPaciente}`, config);
       
       // Actualiza el estado para quitar al paciente de la lista
       setPacientes(pacientesActuales => 
